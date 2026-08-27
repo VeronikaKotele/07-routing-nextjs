@@ -9,15 +9,20 @@ import {
 } from "@tanstack/react-query";
 import { fetchNotes, createNote, deleteNote } from "@/lib/api";
 import type { CreateNoteParams } from "@/lib/api";
+import type { NoteTag } from "@/types/note";
 
 import SearchBox from "@/components/SearchBox/SearchBox";
 import NoteList from "@/components/NoteList/NoteList"
 import NoteForm from "@/components/NoteForm/NoteForm";
 import Pagination from "@/components/Pagination/Pagination";
-import css from "./NotesPage.module.css";
 import Modal from "@/components/Modal/Modal";
+import css from "./NotesPage.module.css";
 
-function NotesClient() {
+type Props = {
+    tag?: NoteTag;
+};
+
+function NotesClient({ tag }: Props) {
     const [currentQuery, setCurrentQuery] = useState<string>("");
     const [currentPage, setCurrentPage] = useState(1);
     const [openNoteForm, setOpenNoteForm] = useState(false);
@@ -60,8 +65,8 @@ function NotesClient() {
     };
 
     const { data, error, isLoading, isError } = useQuery({
-        queryKey: ["notes", currentQuery, currentPage],
-        queryFn: () => fetchNotes({ page: currentPage, search: currentQuery! }),
+        queryKey: ["notes", currentQuery, currentPage, tag],
+        queryFn: () => fetchNotes({ page: currentPage, search: currentQuery!, tag: tag }),
         enabled: true,
         placeholderData: keepPreviousData,
     });
