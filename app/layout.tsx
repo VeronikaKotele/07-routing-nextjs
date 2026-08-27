@@ -19,13 +19,22 @@ export const metadata: Metadata = {
   description: "Created by GoIT student",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+  modal,
+}: Readonly<{
+  children: React.ReactNode;
+  modal: React.ReactNode;
+}>) {
   return (
     <html lang='en'>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <TanStackProvider>
           <Header />
-          <main>{children}</main>
+          <main>
+            {children}
+            {modal}
+          </main>
           <footer>
             <p>
               Created <time dateTime='2026'>2026</time>

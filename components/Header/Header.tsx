@@ -4,11 +4,11 @@ import Link from 'next/link'
 const Header = () => {
     return (
         <header className={css.header}>
-            <h2>NoteHub</h2>
+            <h2 className={css.headerLink}>NoteHub</h2>
             <nav>
                 <ul className={css.navigation}>
-                    <li><Link href="/">Home</Link></li>
-                    <li><Link href="/notes/filter/all">Notes</Link></li>
+                    <li className={css.navigationItem}><Link className={css.navigationLink} href="/">Home</Link></li>
+                    <li className={css.navigationItem}><Link className={css.navigationLink} href="/notes/filter/all">Notes</Link></li>
                 </ul>
             </nav>
         </header>

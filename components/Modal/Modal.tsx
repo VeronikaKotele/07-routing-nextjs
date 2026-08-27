@@ -1,14 +1,19 @@
+'use client';
+
 import css from "./Modal.module.css";
 import { createPortal } from "react-dom";
 import { useEffect } from "react";
+import { useRouter } from 'next/navigation';
 
 interface ModalProps {
-  onClose: () => void;
-  // Додаємо пропс children і типізуємо його
   children: React.ReactNode;
 }
 
-export default function Modal({ onClose, children }: ModalProps) {
+export default function Modal({ children }: ModalProps) {
+  const router = useRouter();
+
+  const onClose = () => router.back();
+
   // Закриття по кліку на фон
   const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
     // Перевіряємо, чи користувач клацнув саме на фон, а не на вкладений div.
