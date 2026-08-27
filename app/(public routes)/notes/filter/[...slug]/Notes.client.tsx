@@ -95,7 +95,7 @@ function NotesClient({ tag }: Props) {
                 </>
             )}
             {openNoteForm && (
-                <Modal onClose={onNoteFormClose}>
+                <Modal>
                     <NoteForm onSubmit={onSubmitNewNoteForm} onClose={onNoteFormClose} />
                 </Modal>
             )}
