@@ -76,3 +76,16 @@ export const deleteNote = async (id: string): Promise<Note> => {
     );
     return response.data;
 };
+
+export type Category = {
+    id: string;
+    name: string;
+    description: string;
+    createdAt: string;
+    updatedAt: string;
+};
+
+export const getCategories = async () => {
+    const res = await axios<Category[]>(`${BASE_URL}/categories`, HEADER_WITH_AUTHORIZATION);
+    return res.data;
+};

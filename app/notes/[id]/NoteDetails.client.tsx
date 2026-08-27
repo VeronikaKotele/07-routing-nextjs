@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { fetchNoteById } from "@/lib/api";
 import css from "./NoteDetails.module.css"
 
@@ -22,9 +22,18 @@ const NoteDetailsClient = () => {
         ? `Updated at: ${note.updatedAt}`
         : `Created at: ${note.createdAt}`;
 
+    const router = useRouter();
+    const handleGoBack = () => {
+        const isSure = confirm('Are you sure?');
+        if (isSure) {
+            router.back();
+        }
+    };
+
     return (
         <div className={css.container}>
             <div className={css.item}>
+                <button onClick={handleGoBack}>Back</button>
                 <div className={css.header}>
                     <h2>{note.title}</h2>
                 </div>

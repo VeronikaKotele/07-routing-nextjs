@@ -6,12 +6,19 @@ import {
 import NotesClient from "./Notes.client";
 import { fetchNotes } from "@/lib/api";
 
-const Notes = async () => {
+type Props = {
+    params: Promise<{ slug: string[] }>;
+};
+
+const Notes = async ({ params }: Props) => {
+    const { slug } = await params;
+    const category = slug[0] === 'all' ? undefined : slug[0];
+
     const queryClient = new QueryClient();
 
     await queryClient.prefetchQuery({
         queryKey: ["notes"],
-        queryFn: () => fetchNotes({}),
+        queryFn: () => fetchNotes({ category }),
     });
 
     return (
