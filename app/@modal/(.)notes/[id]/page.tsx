@@ -4,14 +4,14 @@ import {
     dehydrate,
 } from "@tanstack/react-query";
 import { fetchNoteById } from "@/lib/api";
-import NoteDetailsClient from "./NoteDetails.client";
+import NotePreviewClient from "./NotePreview.client";
 import Modal from "@/components/Modal/Modal";
 
 type Props = {
     params: Promise<{ id: string }>;
 };
 
-const NoteDetails = async ({ params }: Props) => {
+const NotePreview = async ({ params }: Props) => {
     const { id } = await params;
     const queryClient = new QueryClient();
     await queryClient.prefetchQuery({
@@ -22,10 +22,10 @@ const NoteDetails = async ({ params }: Props) => {
     return (
         <Modal>
             <HydrationBoundary state={dehydrate(queryClient)}>
-                <NoteDetailsClient />
+                <NotePreviewClient />
             </HydrationBoundary>
         </Modal>
     );
 }
 
-export default NoteDetails;
+export default NotePreview;

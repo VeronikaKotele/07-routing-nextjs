@@ -3,9 +3,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from 'next/navigation';
 import { fetchNoteById } from "@/lib/api";
-import css from "./NoteDetails.module.css"
+import css from "./NotePreview.module.css"
 
-const NoteDetailsClient = () => {
+const NotePreviewClient = () => {
     const { id } = useParams<{ id: string }>();
 
     const { data: note, isLoading, error } = useQuery({
@@ -36,4 +36,4 @@ const NoteDetailsClient = () => {
     );
 };
 
-export default NoteDetailsClient;
+export default NotePreviewClient;
