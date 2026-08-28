@@ -82,7 +82,9 @@ function NotesClient({ tag }: Props) {
                     Create note +
                 </button>
             </header>
-            {data && data.notes && data.notes.length > 0 && (
+            {isLoading && <p>Loading, please wait...</p>}
+            {isError && <p>Something went wrong: {error?.message}</p>}
+            {data && data.notes && data.notes.length > 0 ? (
                 <>
                     {data.totalPages > 1 && !isLoading && (
                         <Pagination
@@ -93,6 +95,8 @@ function NotesClient({ tag }: Props) {
                     )}
                     <NoteList notes={data.notes} onDelete={handleDeleteNote} />
                 </>
+            ) : !isLoading && !isError && (
+                <p>No notes found. Try different search terms.</p>
             )}
             {openNoteForm && (
                 <Modal>
